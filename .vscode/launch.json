@@ -1,40 +1,29 @@
 {
-    "build": { "dockerfile": "Dockerfile"},
-    "customizations": {
-        "vscode": {
-        "settings": {
-            "editor.fontSize": 16,
-            "terminal.integrated.fontSize": 16,
-            "workbench.iconTheme": "vs-seti",
-            "editor.minimap.enabled": false,
-            "workbench.colorTheme": "MacOS Modern Dark - Ventura Xcode Default",
-            "workbench.preferredDarkColorTheme": "MacOS Modern Dark - Ventura Xcode Default",
-            "editor.wordWrapColumn": 120,
-            "workbench.startupEditor": "none",
-            "editor.useTabStops": false,
-            "files.trimTrailingWhitespace": true,
-            "git.autorefresh": false,
-            "terminal.integrated.cursorBlinking": true,
-            "terminal.integrated.cursorStyle": "line",
-            "debug.console.fontSize": 16,
-            "editor.rulers": [
-                120
-            ],
-            "terminal.integrated.sendKeybindingsToShell": true,
-            "extensions.ignoreRecommendations": true,
-            "remote.autoForwardPorts": false
-        },
-        "extensions": [
-            "ZixuanWang.linkerscript",
-            "ms-vscode.cpptools",
-            "davidbwaters.macos-modern-theme",
-            "maziac.hex-hover-converter",
-            "ms-vscode.hexeditor",
-            "trond-snekvik.gnu-mapfiles",
-            "joshuabernstein.armextensionhelpers",
-            "damiankoper.gdb-debug"
-            ]
+    "configurations": [
+        {
+          "name": "GDB",
+          "type": "cppdbg",
+          "request": "launch",
+          "program": "${workspaceFolder}/port/main.elf",
+          "args": [],
+          "stopAtEntry": true,
+          "cwd": "${workspaceFolder}",
+          "environment": [],
+          "externalConsole": false,
+          "MIMode": "gdb",
+          "setupCommands": [
+            {
+              "description": "Enable pretty-printing for gdb",
+              "text": "-enable-pretty-printing",
+              "ignoreFailures": true
+            },
+            {
+              "description": "Run reset command",
+              "text": "monitor system_reset",
+              "ignoreFailures": true
+            } ],
+          "miDebuggerPath": "/usr/bin/gdb-multiarch",
+          "miDebuggerServerAddress": "127.0.0.1:1234",
         }
-    },
-    "postCreateCommand": "pip3 install pygments --break-system-packages && wget -P ~ https://git.io/.gdbinit"
-}
+    ]
+  }
